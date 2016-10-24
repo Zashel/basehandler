@@ -25,6 +25,12 @@ class BaseHandler(object):   #To be subclassed to handle the GPIO and other Stuf
         '''
         for kwarg in kwargs:
             self._connected_stuff[kwarg] = kwargs[kwarg]
+
+    def handle(self, signal, *args, **kwargs):
+        try:
+            self.get_signal(signal.action)(signal, *args, **kwargs)
+        except KeyError:
+            pass
             
     def get_signal(self, signal):
         return self.__getattribute__("signal_{}".format(signal))
