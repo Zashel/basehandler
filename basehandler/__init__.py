@@ -6,6 +6,10 @@ class BaseHandler(object):   #To be subclassed to handle the GPIO and other Stuf
         You must subclass it to handle the GPIO and other Stuff
         '''
         self._connected_stuff = dict()
+
+    def __dir__(self):
+        directory = super().__dir__()
+        directory.extend([key for key in self._connected_stuff])
         
     def __getattr__(self, key):
         if key in self._connected_stuff:
