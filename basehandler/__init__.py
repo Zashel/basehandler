@@ -12,8 +12,8 @@ class BaseHandler(object):   #To be subclassed to handle the GPIO and other Stuf
         directory.extend([key for key in self._connected_stuff])
         
     def __getattr__(self, key):
-        if key in self._connected_stuff:
-            return self._connected_stuff[key]
+        if key in super().__getattribute__("_connected_stuff"):
+            return super().__getattribute__("_connected_stuff")[key]
         else:
             raise AttributeError
     #~~~~~~~~~PROPERTIES~~~~~~~~~#
